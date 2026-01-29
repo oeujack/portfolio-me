@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 210 20% 90%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 210 20% 90%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 210 20% 90%;
+
+    --primary: 160 60% 45%;
+    --primary-foreground: 220 20% 7%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 15% 12%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 35 90% 55%;
+    --accent-foreground: 220 20% 7%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 160 60% 45%;
+
+    --radius: 0.5rem;
+
+    /* Code syntax colors */
+    --syntax-keyword: 200 80% 60%;
+    --syntax-string: 160 60% 50%;
+    --syntax-property: 210 20% 90%;
+    --syntax-value: 35 90% 55%;
+    --syntax-comment: 215 15% 45%;
+    --syntax-bracket: 215 15% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .code-block {
+    @apply bg-card border border-border rounded-lg p-6 font-mono text-sm;
+  }
+  
+  .syntax-keyword {
+    color: hsl(var(--syntax-keyword));
+  }
+  
+  .syntax-string {
+    color: hsl(var(--syntax-string));
+  }
+  
+  .syntax-property {
+    color: hsl(var(--syntax-property));
+  }
+  
+  .syntax-value {
+    color: hsl(var(--syntax-value));
+  }
+  
+  .syntax-comment {
+    color: hsl(var(--syntax-comment));
+  }
+  
+  .syntax-bracket {
+    color: hsl(var(--syntax-bracket));
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded font-mono font-medium 
+           hover:bg-primary/90 transition-colors inline-flex items-center gap-2;
+  }
+  
+  .nav-link {
+    @apply text-muted-foreground hover:text-foreground transition-colors font-medium;
+  }
+  
+  .nav-link-active {
+    @apply text-foreground border-b-2 border-primary pb-1;
+  }
+}
+
+/* Background grid pattern */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Floating code snippets in background */
+.bg-code-overlay {
+  position: relative;
+}
+
+.bg-code-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, hsl(160 60% 45% / 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, hsl(35 90% 55% / 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
