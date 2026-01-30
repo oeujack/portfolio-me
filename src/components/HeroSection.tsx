@@ -4,15 +4,9 @@ import gsap from "gsap";
 import { Lock } from "lucide-react";
 import curriculum from "../assets/curriculum.pdf";
 
-// Certifique-se de ter a variável ou import do 'curriculum' definido
-// import { curriculum } from "./seu-caminho";
-
 const HeroSection = () => {
   const codeBlockRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
-
-  // Exemplo de link caso não venha de fora
-  const curriculum = "/seu-curriculo.pdf";
 
   useEffect(() => {
     // Animate code block lines
@@ -157,7 +151,7 @@ const HeroSection = () => {
 
               {/* portfolio: 4 */}
               <div className="code-line pl-4">
-                <span className="syntax-property">portfolio</span>
+                <span className="syntax-property">projetos</span>
                 <span className="syntax-bracket">:</span>{" "}
                 <span className="syntax-value">4</span>
                 <span className="syntax-bracket">,</span>

@@ -8,7 +8,7 @@ const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  
+
   // Estado para controlar o loading do envio
   const [isSending, setIsSending] = useState(false);
 
@@ -36,23 +36,24 @@ const ContactSection = () => {
 
     setIsSending(true);
 
-    emailjs.sendForm(
-      'service_hhik2lf',   // Pegue no painel do EmailJS
-      'template_d6aarnm',  // Pegue no painel do EmailJS
-      formRef.current,
-      'O2wkk9zvPtG6vKorQ'    // Pegue em Account > API Keys
-    )
-    .then(() => {
-      alert("Mensagem enviada com sucesso! 🚀");
-      formRef.current?.reset(); // Limpa o formulário
-    })
-    .catch((error) => {
-      console.error("Erro ao enviar:", error);
-      alert("Houve um erro ao enviar. Tente novamente.");
-    })
-    .finally(() => {
-      setIsSending(false);
-    });
+    emailjs
+      .sendForm(
+        "service_hhik2lf", // Pegue no painel do EmailJS
+        "template_d6aarnm", // Pegue no painel do EmailJS
+        formRef.current,
+        "O2wkk9zvPtG6vKorQ", // Pegue em Account > API Keys
+      )
+      .then(() => {
+        alert("Mensagem enviada com sucesso! 🚀");
+        formRef.current?.reset(); // Limpa o formulário
+      })
+      .catch((error) => {
+        console.error("Erro ao enviar:", error);
+        alert("Houve um erro ao enviar. Tente novamente.");
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   return (
@@ -84,7 +85,7 @@ const ContactSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-muted-foreground font-mono text-sm"
             >
-              sendMessage(sua ideia) → response.collaboration
+              enviarMensagem(sua ideia) → response.collaboration
             </motion.p>
           </div>
 
@@ -141,7 +142,7 @@ const ContactSection = () => {
                   </label>
                   <textarea
                     required
-                    name="message" // Importante para o EmailJS
+                    name="message"
                     rows={4}
                     className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono text-sm resize-none placeholder:text-muted-foreground/50"
                     placeholder='"Conte-me sobre seu projeto..."'
@@ -151,12 +152,14 @@ const ContactSection = () => {
                 <div className="pt-2">
                   <motion.button
                     type="submit"
-                    disabled={isSending} // Desabilita enquanto envia
+                    disabled={isSending}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className={`w-full btn-primary justify-center ${isSending ? 'opacity-70 cursor-wait' : ''}`}
+                    className={`w-full btn-primary justify-center ${isSending ? "opacity-70 cursor-wait" : ""}`}
                   >
-                    <span>{isSending ? "sending..." : "sendMessage()"}</span>
+                    <span>
+                      {isSending ? "enviando..." : "enviarMensagem()"}
+                    </span>
                     {!isSending && <Send className="w-4 h-4" />}
                   </motion.button>
                 </div>
@@ -168,7 +171,7 @@ const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Contact Links */}
+          {/* Contatos links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -186,7 +189,11 @@ const ContactSection = () => {
                 value: "/in/jackson-dos-santos",
                 url: "https://www.linkedin.com/in/jackson-dos-santos/",
               },
-              { label: "email", value: "contato.jacksondsantos@gmail.com", url: "mailto:contato.jacksondsantos@gmail.com" },
+              {
+                label: "email",
+                value: "contato.jacksondsantos@gmail.com",
+                url: "mailto:contato.jacksondsantos@gmail.com",
+              },
             ].map((link) => (
               <motion.a
                 key={link.label}
