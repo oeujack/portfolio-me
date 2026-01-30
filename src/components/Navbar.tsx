@@ -31,7 +31,6 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between py-5">
-          {/* Logo */}
           <motion.a
             href="#home"
             className="flex items-center gap-2"

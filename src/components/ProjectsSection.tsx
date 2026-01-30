@@ -12,7 +12,8 @@ const projects = [
     id: 1,
     title: "TodoList",
     category: "frontend",
-    description: "Gerenciador de tarefas com persistência local e validação de formulários.",
+    description:
+      "Gerenciador de tarefas com persistência local e validação de formulários.",
     tech: ["TypeScript", "React", "MUI", "localStorage", "formik"],
     status: "produção",
     github: "https://github.com/oeujack/todo-list",
@@ -32,8 +33,18 @@ const projects = [
     id: 3,
     title: "ByteBank",
     category: "fullstack",
-    description: "Simulação de dashboard bancário com gerenciamento de estado global.",
-    tech: ["TypeScript", "React", "MUI", "formik", "Redux", "NodeJS", "express", "SQLite"],
+    description:
+      "Simulação de dashboard bancário com gerenciamento de estado global.",
+    tech: [
+      "TypeScript",
+      "React",
+      "MUI",
+      "formik",
+      "Redux",
+      "NodeJS",
+      "express",
+      "SQLite",
+    ],
     status: "produção",
     github: "https://github.com/oeujack/bytebank-app",
     url: "https://bytebank-app.vercel.app/",
@@ -69,7 +80,6 @@ const ProjectsSection = () => {
   return (
     <section id="projetos" ref={sectionRef} className="relative py-32 bg-grid">
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
         <div className="mb-16">
           <motion.span
             initial={{ opacity: 0 }}
@@ -88,8 +98,6 @@ const ProjectsSection = () => {
             <span className="text-muted-foreground">//</span> Meus Projetos
           </motion.h2>
         </div>
-
-        {/* Projects Grid */}
         <div className="space-y-6">
           {projects.map((project, index) => (
             <motion.div
@@ -108,7 +116,6 @@ const ProjectsSection = () => {
                       </span>
                     </div>
 
-                    {/* Project title as function */}
                     <h3 className="font-mono text-xl mb-2">
                       <span className="syntax-keyword">export</span>{" "}
                       <span className="syntax-keyword">const</span>{" "}
@@ -119,14 +126,12 @@ const ProjectsSection = () => {
                       <span className="syntax-bracket">{"() => {"}</span>
                     </h3>
 
-                    {/* Description */}
                     <p className="text-muted-foreground pl-4 mb-3 font-mono text-sm">
                       <span className="syntax-comment">
                         // {project.description}
                       </span>
                     </p>
 
-                    {/* Tech stack */}
                     <div className="pl-4 font-mono text-sm">
                       <span className="syntax-keyword">return</span>{" "}
                       <span className="syntax-bracket">[</span>
@@ -147,7 +152,6 @@ const ProjectsSection = () => {
                     </div>
                   </div>
 
-                  {/* Actions */}
                   <div className="flex items-center gap-3">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
@@ -174,7 +178,6 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        {/* View All */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -183,7 +186,7 @@ const ProjectsSection = () => {
         >
           <motion.button
             whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}           
+            whileTap={{ scale: 0.98 }}
             className="font-mono text-muted-foreground hover:text-primary transition-colors"
             onClick={() =>
               navigate("https://github.com/oeujack?tab=repositories")

@@ -12,14 +12,10 @@ const ScrollLine = () => {
 
     const path = pathRef.current;
     const pathLength = path.getTotalLength();
-
-    // Set initial state
     gsap.set(path, {
       strokeDasharray: pathLength,
       strokeDashoffset: pathLength,
     });
-
-    // Animate on scroll
     gsap.to(path, {
       strokeDashoffset: 0,
       ease: "none",
@@ -61,12 +57,41 @@ const ScrollLine = () => {
         strokeLinecap="round"
         className="drop-shadow-[0_0_8px_hsl(160,60%,45%,0.5)]"
       />
-      {/* Floating dots along the path */}
-      <circle cx="150" cy="400" r="4" fill="hsl(160, 60%, 45%)" className="animate-pulse" />
-      <circle cx="100" cy="800" r="3" fill="hsl(160, 60%, 45%)" className="animate-pulse" />
-      <circle cx="300" cy="1600" r="5" fill="hsl(160, 60%, 45%)" className="animate-pulse" />
-      <circle cx="400" cy="2400" r="3" fill="hsl(160, 60%, 45%)" className="animate-pulse" />
-      <circle cx="500" cy="3200" r="4" fill="hsl(160, 60%, 45%)" className="animate-pulse" />
+      <circle
+        cx="150"
+        cy="400"
+        r="4"
+        fill="hsl(160, 60%, 45%)"
+        className="animate-pulse"
+      />
+      <circle
+        cx="100"
+        cy="800"
+        r="3"
+        fill="hsl(160, 60%, 45%)"
+        className="animate-pulse"
+      />
+      <circle
+        cx="300"
+        cy="1600"
+        r="5"
+        fill="hsl(160, 60%, 45%)"
+        className="animate-pulse"
+      />
+      <circle
+        cx="400"
+        cy="2400"
+        r="3"
+        fill="hsl(160, 60%, 45%)"
+        className="animate-pulse"
+      />
+      <circle
+        cx="500"
+        cy="3200"
+        r="4"
+        fill="hsl(160, 60%, 45%)"
+        className="animate-pulse"
+      />
     </svg>
   );
 };

@@ -9,7 +9,6 @@ const HeroSection = () => {
   const cursorRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Animate code block lines
     if (codeBlockRef.current) {
       const lines = codeBlockRef.current.querySelectorAll(".code-line");
       gsap.fromTo(
@@ -57,8 +56,6 @@ const HeroSection = () => {
             <span className="text-muted-foreground">//</span> Transformando café
             em <span className="text-primary">Código</span>
           </motion.h1>
-
-          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -75,8 +72,6 @@ const HeroSection = () => {
               <Lock className="w-4 h-4" />
             </motion.button>
           </motion.div>
-
-          {/* Code Block Atualizado */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}

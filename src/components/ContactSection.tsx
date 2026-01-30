@@ -1,15 +1,15 @@
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react"; // Adicionei useState
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import emailjs from "@emailjs/browser"; // Import do EmailJS
+import emailjs from "@emailjs/browser";
 import { Send } from "lucide-react";
+import { toast } from "react-toastify";
+import { toastConfig } from "@/lib/toast-config";
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  // Estado para controlar o loading do envio
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const ContactSection = () => {
     }
   }, [isInView]);
 
-  // Função que envia o email
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
@@ -38,14 +37,16 @@ const ContactSection = () => {
 
     emailjs
       .sendForm(
-        "service_hhik2lf", // Pegue no painel do EmailJS
-        "template_d6aarnm", // Pegue no painel do EmailJS
+        "service_hhik2lf",
+        "template_d6aarnm",
         formRef.current,
-        "O2wkk9zvPtG6vKorQ", // Pegue em Account > API Keys
+        "O2wkk9zvPtG6vKorQ",
       )
       .then(() => {
-        alert("Mensagem enviada com sucesso! 🚀");
-        formRef.current?.reset(); // Limpa o formulário
+        toast.error("Mensagem enviada com sucesso! 🚀", {
+          ...toastConfig(),
+        });
+        formRef.current?.reset();
       })
       .catch((error) => {
         console.error("Erro ao enviar:", error);
