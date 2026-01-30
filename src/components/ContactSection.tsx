@@ -43,7 +43,7 @@ const ContactSection = () => {
         "O2wkk9zvPtG6vKorQ",
       )
       .then(() => {
-        toast.error("Mensagem enviada com sucesso! 🚀", {
+        toast.success("Mensagem enviada com sucesso! 🚀", {
           ...toastConfig(),
         });
         formRef.current?.reset();
