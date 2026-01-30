@@ -1,12 +1,16 @@
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react"; // Adicionei useState
 import gsap from "gsap";
+import emailjs from "@emailjs/browser"; // Import do EmailJS
 import { Send } from "lucide-react";
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  
+  // Estado para controlar o loading do envio
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     if (formRef.current && isInView) {
@@ -24,6 +28,32 @@ const ContactSection = () => {
       );
     }
   }, [isInView]);
+
+  // Função que envia o email
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsSending(true);
+
+    emailjs.sendForm(
+      'service_hhik2lf',   // Pegue no painel do EmailJS
+      'template_d6aarnm',  // Pegue no painel do EmailJS
+      formRef.current,
+      'O2wkk9zvPtG6vKorQ'    // Pegue em Account > API Keys
+    )
+    .then(() => {
+      alert("Mensagem enviada com sucesso! 🚀");
+      formRef.current?.reset(); // Limpa o formulário
+    })
+    .catch((error) => {
+      console.error("Erro ao enviar:", error);
+      alert("Houve um erro ao enviar. Tente novamente.");
+    })
+    .finally(() => {
+      setIsSending(false);
+    });
+  };
 
   return (
     <section id="contato" ref={sectionRef} className="relative py-32 bg-grid">
@@ -54,7 +84,7 @@ const ContactSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-muted-foreground font-mono text-sm"
             >
-              sendMessage(yourIdea) → response.collaboration
+              sendMessage(sua ideia) → response.collaboration
             </motion.p>
           </div>
 
@@ -71,7 +101,8 @@ const ContactSection = () => {
                 </span>
               </div>
 
-              <form ref={formRef} className="space-y-5">
+              {/* Adicionei o onSubmit */}
+              <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
                 <div>
                   <label className="block font-mono text-sm mb-2">
                     <span className="syntax-keyword">const</span>{" "}
@@ -79,6 +110,8 @@ const ContactSection = () => {
                     <span className="syntax-bracket">=</span>
                   </label>
                   <input
+                    required // Importante para não enviar vazio
+                    name="name" // Importante para o EmailJS
                     type="text"
                     className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono text-sm placeholder:text-muted-foreground/50"
                     placeholder='"Seu nome"'
@@ -92,6 +125,8 @@ const ContactSection = () => {
                     <span className="syntax-bracket">=</span>
                   </label>
                   <input
+                    required
+                    name="email" // Importante para o EmailJS
                     type="email"
                     className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono text-sm placeholder:text-muted-foreground/50"
                     placeholder='"seu@email.com"'
@@ -105,6 +140,8 @@ const ContactSection = () => {
                     <span className="syntax-bracket">=</span>
                   </label>
                   <textarea
+                    required
+                    name="message" // Importante para o EmailJS
                     rows={4}
                     className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono text-sm resize-none placeholder:text-muted-foreground/50"
                     placeholder='"Conte-me sobre seu projeto..."'
@@ -114,12 +151,13 @@ const ContactSection = () => {
                 <div className="pt-2">
                   <motion.button
                     type="submit"
+                    disabled={isSending} // Desabilita enquanto envia
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className="w-full btn-primary justify-center"
+                    className={`w-full btn-primary justify-center ${isSending ? 'opacity-70 cursor-wait' : ''}`}
                   >
-                    <span>sendMessage()</span>
-                    <Send className="w-4 h-4" />
+                    <span>{isSending ? "sending..." : "sendMessage()"}</span>
+                    {!isSending && <Send className="w-4 h-4" />}
                   </motion.button>
                 </div>
               </form>
@@ -143,13 +181,17 @@ const ContactSection = () => {
                 value: "@oeujack",
                 url: "https://github.com/oeujack",
               },
-              { label: "linkedin", value: "/in/jackson" },
-              { label: "email", value: "contato.jacksondsantos@gmail.com" },
+              {
+                label: "linkedin",
+                value: "/in/jackson-dos-santos",
+                url: "https://www.linkedin.com/in/jackson-dos-santos/",
+              },
+              { label: "email", value: "contato.jacksondsantos@gmail.com", url: "mailto:contato.jacksondsantos@gmail.com" },
             ].map((link) => (
               <motion.a
                 key={link.label}
                 href={link.url}
-                
+                target="_blank"
                 whileHover={{ y: -2 }}
                 className="text-muted-foreground hover:text-primary transition-colors"
               >

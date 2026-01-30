@@ -4,9 +4,15 @@ import gsap from "gsap";
 import { Lock } from "lucide-react";
 import curriculum from "../assets/curriculum.pdf";
 
+// Certifique-se de ter a variável ou import do 'curriculum' definido
+// import { curriculum } from "./seu-caminho";
+
 const HeroSection = () => {
   const codeBlockRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
+
+  // Exemplo de link caso não venha de fora
+  const curriculum = "/seu-curriculo.pdf";
 
   useEffect(() => {
     // Animate code block lines
@@ -38,27 +44,25 @@ const HeroSection = () => {
     >
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Main Title */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="font-mono text-sm text-muted-foreground mb-4"
+          >
+            <span className="text-primary">const</span> greeting ={" "}
+            <span className="text-green-400">"Olá, visitante!"</span>;
+          </motion.p>
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-6 tracking-tight"
           >
-            <span className="text-muted-foreground">//</span> Build Your Way
-            Through <span className="text-primary">Code</span>
+            <span className="text-muted-foreground">//</span> Transformando café
+            em <span className="text-primary">Código</span>
           </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-muted-foreground text-lg md:text-xl mb-10 max-w-2xl mx-auto"
-          >
-            A modern developer course where logic, system thinking, and
-            engineering discipline shape the next generation of builders.
-          </motion.p>
 
           {/* CTA Button */}
           <motion.div
@@ -78,7 +82,7 @@ const HeroSection = () => {
             </motion.button>
           </motion.div>
 
-          {/* Code Block */}
+          {/* Code Block Atualizado */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,106 +95,102 @@ const HeroSection = () => {
                   // JACKSON :: Developer Configuration
                 </span>
               </div>
+
+              {/* const developer = { */}
               <div className="code-line">
                 <span className="syntax-keyword">const</span>{" "}
                 <span className="syntax-property">developer</span>{" "}
                 <span className="syntax-bracket">=</span>{" "}
                 <span className="syntax-bracket">{"{"}</span>
               </div>
+
+              {/* role: "Frontend Developer" */}
               <div className="code-line pl-4">
                 <span className="syntax-property">role</span>
                 <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-string">"fullstack developer"</span>
+                <span className="syntax-string">"Frontend Developer"</span>
                 <span className="syntax-bracket">,</span>
               </div>
-              <div className="code-line pl-4">
-                <span className="syntax-property">goal</span>
-                <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-string">
-                  "build real-world systems"
-                </span>
-                <span className="syntax-bracket">,</span>
-              </div>
+
+              {/* level: "Pleno" */}
               <div className="code-line pl-4">
                 <span className="syntax-property">level</span>
                 <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-bracket">[</span>
-                <span className="syntax-string">"intermediate"</span>
-                <span className="syntax-bracket">,</span>{" "}
-                <span className="syntax-string">"advanced"</span>
-                <span className="syntax-bracket">]</span>
+                <span className="syntax-string">"Pleno"</span>
                 <span className="syntax-bracket">,</span>
               </div>
-              <div className="code-line"></div>
+
+              {/* skills: [...] */}
               <div className="code-line pl-4">
                 <span className="syntax-property">skills</span>
                 <span className="syntax-bracket">:</span>{" "}
                 <span className="syntax-bracket">[</span>
               </div>
               <div className="code-line pl-8">
-                <span className="syntax-string">"think in logic and flow"</span>
-                <span className="syntax-bracket">,</span>
-              </div>
-              <div className="code-line pl-8">
                 <span className="syntax-string">
-                  "write clean and maintainable code"
+                  "Raciocínio Lógico e Fluxo"
                 </span>
                 <span className="syntax-bracket">,</span>
               </div>
               <div className="code-line pl-8">
                 <span className="syntax-string">
-                  "understand system architecture"
+                  "Código Limpo e Manutenível"
                 </span>
                 <span className="syntax-bracket">,</span>
               </div>
               <div className="code-line pl-8">
+                <span className="syntax-string">"Arquitetura de Sistemas"</span>
+                <span className="syntax-bracket">,</span>
+              </div>
+              <div className="code-line pl-8">
                 <span className="syntax-string">
-                  "build and deploy real projects"
+                  "Deploy de Projetos Reais"
                 </span>
               </div>
               <div className="code-line pl-4">
                 <span className="syntax-bracket">]</span>
                 <span className="syntax-bracket">,</span>
               </div>
+
+              {/* Separator */}
               <div className="code-line"></div>
+
+              {/* portfolio: 4 */}
               <div className="code-line pl-4">
                 <span className="syntax-property">portfolio</span>
                 <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-bracket">{"{"}</span>
-              </div>
-              <div className="code-line pl-8">
-                <span className="syntax-property">projects</span>
-                <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-value">12</span>
+                <span className="syntax-value">4</span>
                 <span className="syntax-bracket">,</span>
               </div>
-              <div className="code-line pl-8">
+
+              {/* focus: "..." */}
+              <div className="code-line pl-4">
                 <span className="syntax-property">focus</span>
                 <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-string">"hands-on practice"</span>
+                <span className="syntax-string">"Prática e Performance"</span>
                 <span className="syntax-bracket">,</span>
               </div>
-              <div className="code-line pl-8">
+
+              {/* workflow: "..." */}
+              <div className="code-line pl-4">
                 <span className="syntax-property">workflow</span>
                 <span className="syntax-bracket">:</span>{" "}
-                <span className="syntax-string">"learn → build → iterate"</span>
-              </div>
-              <div className="code-line pl-4">
-                <span className="syntax-bracket">{"}"}</span>
-              </div>
-              <div className="code-line">
-                <span className="syntax-bracket">{"}"}</span>
-                <span className="syntax-bracket">;</span>
+                <span className="syntax-string">
+                  "Aprender → Criar → Iterar"
+                </span>
               </div>
               <div className="code-line mt-4">
                 <span className="syntax-property">nextStep</span>
                 <span className="syntax-bracket">:</span>{" "}
                 <span className="syntax-string">"run(Portfolio)"</span>
               </div>
+              {/* }; */}
               <div className="code-line">
+                <span className="syntax-bracket">{"}"}</span>
+                <span className="syntax-bracket">;</span>
                 <span
                   ref={cursorRef}
-                  className="inline-block w-2 h-5 bg-primary animate-blink ml-1"
+                  className="inline-block w-2 h-5 bg-primary animate-blink ml-1 align-middle"
                 />
               </div>
             </div>

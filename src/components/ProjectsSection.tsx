@@ -3,39 +3,47 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Github } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    category: "fullstack",
-    description: "Plataforma completa de vendas com carrinho, pagamentos e dashboard administrativo.",
-    tech: ["TypeScript", "React", "Node.js", "PostgreSQL"],
-    status: "production",
+    title: "TodoList",
+    category: "frontend",
+    description: "Cadastro de cadastro de tarefas.",
+    tech: ["TypeScript", "React", "MUI", "localStorage", "formik"],
+    status: "produção",
+    github: "https://github.com/oeujack/todo-list",
+    url: "https://todolist8bit.vercel.app/",
   },
   {
     id: 2,
-    title: "Real-time Dashboard",
+    title: "ShinobiGallery",
     category: "frontend",
-    description: "Dashboard de analytics com gráficos em tempo real e visualização de dados.",
-    tech: ["TypeScript", "Next.js", "WebSockets", "D3.js"],
-    status: "production",
+    description: "Esfera com lista de personagens do universo Naruto.",
+    tech: ["TypeScript", "React", "MUI", "React Bits"],
+    status: "indisponivel",
+    github: "https://github.com/oeujack/shinobi-gallery-app",
+    url: "https://shinobi-gallery-app.vercel.app/",
   },
   {
     id: 3,
-    title: "API Gateway",
-    category: "backend",
-    description: "Sistema de gateway para microserviços com rate limiting e autenticação.",
-    tech: ["TypeScript", "Fastify", "Redis", "Docker"],
-    status: "development",
+    title: "Bytebank",
+    category: "frontend",
+    description: "Sistema de pagamento bancário com fins estudatis.",
+    tech: ["TypeScript", "React", "MUI", "formik", "Redux"],
+    status: "produção",
+    github: "https://github.com/oeujack/bytebank-app",
+    url: "https://bytebank-app.vercel.app/",
   },
 ];
 
 const ProjectsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cards = document.querySelectorAll(".project-card");
@@ -53,7 +61,7 @@ const ProjectsSection = () => {
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
     });
   }, []);
@@ -77,8 +85,7 @@ const ProjectsSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-4xl font-mono font-bold"
           >
-            <span className="text-muted-foreground">//</span> Projetos em{" "}
-            <span className="text-primary">Destaque</span>
+            <span className="text-muted-foreground">//</span> Meus Projetos
           </motion.h2>
         </div>
 
@@ -100,7 +107,7 @@ const ProjectsSection = () => {
                         // {project.category} :: {project.status}
                       </span>
                     </div>
-                    
+
                     {/* Project title as function */}
                     <h3 className="font-mono text-xl mb-2">
                       <span className="syntax-keyword">export</span>{" "}
@@ -111,12 +118,14 @@ const ProjectsSection = () => {
                       <span className="syntax-bracket">=</span>{" "}
                       <span className="syntax-bracket">{"() => {"}</span>
                     </h3>
-                    
+
                     {/* Description */}
                     <p className="text-muted-foreground pl-4 mb-3 font-mono text-sm">
-                      <span className="syntax-comment">// {project.description}</span>
+                      <span className="syntax-comment">
+                        // {project.description}
+                      </span>
                     </p>
-                    
+
                     {/* Tech stack */}
                     <div className="pl-4 font-mono text-sm">
                       <span className="syntax-keyword">return</span>{" "}
@@ -132,28 +141,32 @@ const ProjectsSection = () => {
                       <span className="syntax-bracket">]</span>
                       <span className="syntax-bracket">;</span>
                     </div>
-                    
+
                     <div className="font-mono text-sm mt-2">
                       <span className="syntax-bracket">{"}"}</span>
                     </div>
                   </div>
-                  
+
                   {/* Actions */}
                   <div className="flex items-center gap-3">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-3 border border-border rounded-lg hover:border-primary hover:text-primary transition-colors"
+                      onClick={() => navigate(project.github)}
                     >
                       <Github className="w-5 h-5" />
                     </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3 border border-border rounded-lg hover:border-primary hover:text-primary transition-colors"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </motion.button>
+                    {project.url && (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="p-3 border border-border rounded-lg hover:border-primary hover:text-primary transition-colors"
+                        onClick={() => navigate(project.url)}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </motion.button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -170,10 +183,13 @@ const ProjectsSection = () => {
         >
           <motion.button
             whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{ scale: 0.98 }}           
             className="font-mono text-muted-foreground hover:text-primary transition-colors"
+            onClick={() =>
+              navigate("https://github.com/oeujack?tab=repositories")
+            }
           >
-            viewAllProjects() →
+            acessarTodosProjetos() →
           </motion.button>
         </motion.div>
       </div>
