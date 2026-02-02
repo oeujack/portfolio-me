@@ -32,7 +32,7 @@ const HeroSection = () => {
 
   return (
     <section
-      id="home"
+      id="inicio"
       className="relative min-h-screen flex items-center justify-center bg-grid bg-code-overlay pt-20"
     >
       <div className="container mx-auto px-6 relative z-10">
